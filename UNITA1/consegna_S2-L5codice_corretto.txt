@@ -1,0 +1,92 @@
+#include <stdio.h>
+
+void menu(){
+
+    printf("Benvenuto, sono un assistente digitale, posso aiutarti a sbrigare alcuni compiti\n");
+    printf("Come posso aiutarti?\n");
+    printf("A >> Moltiplicare due numeri\nB >> Dividere due numeri\nC >> Inserire una stringa\n");
+
+}
+
+void moltiplica(){
+
+    short int a = 0, b = 0; 				// Corretta inizializzazione di a e b
+                                      
+    printf("Inserisci i due numeri da moltiplicare: ");
+
+    if (scanf("%hd", &a) != 1 || scanf("%hd", &b) != 1) {     // Utilizzo %hd invece di %d oppure avrei dovuto
+        printf("Input non valido\n");			      // mettere int come tipo alle variabili
+        return;                                               // non si usa %f ma %hd per gli short int
+    }	  						      //inoltre aggiungo un controllo che l'utente inserisca solo                      
+                                                              //numeri
+                                                                  
+    						  
+
+    short int prodotto = a * b;
+
+    printf("Il prodotto tra %hd e %hd è: %hd\n", a, b, prodotto); 
+
+}
+
+void dividi(){
+
+    int a = 0, b = 0;                                   // Corretta inizializzazione di a e b
+    printf("Inserisci il numeratore: ");
+
+    if (scanf("%d", &a) != 1) {				// ho aggiunto un controllo che l'utente inserisca solo numeri
+        printf("Input non valido, devi inserire numeri\n");
+        return;
+    }
+
+    printf("Inserisci il denominatore: ");
+
+    if (scanf("%d", &b) != 1) {				// ho aggiunto un controllo che l'utente inserisca solo numeri
+        printf("Input non valido, devi inserire numeri\n");
+        return;
+    }
+
+    if (b != 0) {                                                     	 // Controllo per la divisione per zero
+        float divisione = (float) a / b;                                 // si usa / per divisione non %
+        printf("La divisione tra %d e %d è: %.2f\n", a, b, divisione);   
+    } else {
+        printf("Errore: divisione per zero.\n");
+
+    }
+}
+
+void ins_string(){
+
+    char stringa[100];                      // Aumentata dimensione dell'array per non avere buffer overflow
+    printf("Inserisci la stringa: \n");
+    scanf("%99s", stringa);                 // Rimosso & e limitata lunghezza della stringa cosi non ho buffere overeflow
+    printf("Hai inserito: %s\n", stringa);  
+
+}
+
+
+int main() 
+{
+    char scelta = '\0';                     // Corretta dichiarazione
+    menu();
+    scanf(" %c", &scelta);                  // Usare %c per leggere un carattere non %d
+
+    switch (scelta)
+    {
+        case 'A' || 'a':		    // ho aggiunto un OR cosi la scelta non è più case sensitive
+            moltiplica();
+            break;
+        case 'B' || 'b':
+            dividi();
+            break;
+        case 'C' || 'c':
+            ins_string();
+            break;
+        default:                           // Aggiunto caso predefinito che prima mancava
+            printf("Scelta non valida\n");
+    }
+
+    return 0;
+}
+
+
+
