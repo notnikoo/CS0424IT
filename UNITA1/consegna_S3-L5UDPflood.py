@@ -35,8 +35,8 @@ try:
     print("UDP flood completato")  
     
 except Exception as e:
-    print(f"Si è verificato un errore: {e}")
-    
+    print(f"Si è verificato un errore: {e}")            #gestisco eccezione
+
 
 s.close()
-print("Connessione chiusa")
+print("Connessione chiusa")                              #chiusura connessione
